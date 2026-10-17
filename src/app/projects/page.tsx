@@ -1,0 +1,8 @@
+import type {Metadata} from "next";
+import Link from "next/link";
+import {ArrowUpRight} from "lucide-react";
+import InnerPage from "@/components/InnerPage";
+import {projects,company} from "@/data/company";
+export const metadata:Metadata={title:"Projects",description:"Explore the 26 historical projects documented in the SLV Infra company portfolio.",alternates:{canonical:"/projects"}};
+const money=(n:number|null)=>n===null?"Not specified":n>=100?"₹"+(n/100).toLocaleString("en-IN",{maximumFractionDigits:3})+" Cr":"₹"+n.toLocaleString("en-IN")+" L";
+export default function Projects(){return <InnerPage index="03" eyebrow="PROJECT ARCHIVE" title="A record of the work." lead="Twenty-six historical project entries documented in the SLV company brochure, spanning infrastructure, civil construction and land development."><section className="inner-content"><div className="section-wrap"><div className="archive-topline"><span>DOCUMENTED ENGAGEMENTS / 01—26</span><span>HISTORICAL PORTFOLIO</span></div><div className="archive-grid">{projects.map(p=><article className="archive-card" key={p.id}><span className="eyebrow dark-eyebrow">{String(p.id).padStart(2,"0")} / 26</span><h2>{p.client}</h2><p>{p.project}</p><div><span>BROCHURE CONTRACT VALUE</span><strong>{money(p.costLakhs)}</strong></div></article>)}</div><p className="archive-note">{company.note} Project descriptions and client names require confirmation before public launch. No imagery is attributed to specific projects without verification.</p><div className="inner-cta"><h2>Have a project in mind?</h2><Link href="/contact">Start a conversation <ArrowUpRight size={20}/></Link></div></div></section></InnerPage>}
